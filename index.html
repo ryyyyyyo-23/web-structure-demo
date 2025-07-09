@@ -3,7 +3,7 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>企業ウェブサイト構造図・ワイヤーフレーム</title>
+<title>企業ウェブサイト構造図・ワイヤーフレーム - 設計ドキュメント</title>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/mermaid/10.6.1/mermaid.min.js"></script>
 <style>
 * {
@@ -14,213 +14,157 @@ box-sizing: border-box;
 
 ```
     body {
-        font-family: 'Arial', sans-serif;
-        background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
-        min-height: 100vh;
-        padding: 20px;
+        font-family: 'Hiragino Sans', 'Yu Gothic', 'Meiryo', sans-serif;
+        line-height: 1.8;
+        color: #333;
+        background: #f8f9fa;
     }
 
-    .container {
-        max-width: 1600px;
+    .document-container {
+        max-width: 1200px;
         margin: 0 auto;
         background: white;
-        border-radius: 15px;
-        box-shadow: 0 20px 40px rgba(0,0,0,0.1);
-        overflow: hidden;
+        min-height: 100vh;
     }
 
     .header {
         background: linear-gradient(135deg, #2c3e50 0%, #34495e 100%);
         color: white;
-        padding: 30px;
+        padding: 40px;
         text-align: center;
     }
 
     .header h1 {
         font-size: 2.5em;
-        margin-bottom: 10px;
-        text-shadow: 2px 2px 4px rgba(0,0,0,0.3);
+        margin-bottom: 15px;
+        font-weight: 300;
     }
 
-    .header p {
+    .header .subtitle {
         font-size: 1.2em;
         opacity: 0.9;
+        font-weight: 300;
     }
 
-    .nav-tabs {
-        display: flex;
-        background: #ecf0f1;
-        overflow-x: auto;
-        flex-wrap: wrap;
-    }
-
-    .nav-tab {
-        padding: 15px 20px;
-        background: none;
-        border: none;
-        cursor: pointer;
-        font-size: 0.9em;
-        font-weight: bold;
-        color: #34495e;
-        transition: all 0.3s ease;
-        white-space: nowrap;
-        position: relative;
-        flex: 1;
-        min-width: 120px;
-    }
-
-    .nav-tab:hover {
-        background: #d5dbdb;
-        transform: translateY(-2px);
-    }
-
-    .nav-tab.active {
-        background: #3498db;
-        color: white;
-        box-shadow: 0 4px 8px rgba(52, 152, 219, 0.3);
-    }
-
-    .tab-content {
-        display: none;
+    .toc {
+        background: #e9ecef;
         padding: 30px;
-        min-height: 600px;
+        border-bottom: 3px solid #3498db;
     }
 
-    .tab-content.active {
-        display: block;
+    .toc h2 {
+        color: #2c3e50;
+        margin-bottom: 20px;
+        font-size: 1.5em;
+    }
+
+    .toc ul {
+        list-style: none;
+        columns: 2;
+        gap: 30px;
+    }
+
+    .toc li {
+        margin-bottom: 8px;
+        break-inside: avoid;
+    }
+
+    .toc a {
+        color: #3498db;
+        text-decoration: none;
+        font-weight: 500;
+    }
+
+    .toc a:hover {
+        text-decoration: underline;
+    }
+
+    .content {
+        padding: 40px;
+    }
+
+    .section {
+        margin-bottom: 50px;
+        page-break-inside: avoid;
+    }
+
+    .section h2 {
+        color: #2c3e50;
+        font-size: 2em;
+        margin-bottom: 20px;
+        padding-bottom: 10px;
+        border-bottom: 3px solid #3498db;
+    }
+
+    .section h3 {
+        color: #34495e;
+        font-size: 1.5em;
+        margin: 30px 0 15px 0;
+        padding-left: 15px;
+        border-left: 4px solid #3498db;
+    }
+
+    .section h4 {
+        color: #2c3e50;
+        font-size: 1.2em;
+        margin: 20px 0 10px 0;
     }
 
     .mermaid-container {
         background: #f8f9fa;
+        border: 2px solid #e9ecef;
         border-radius: 10px;
         padding: 20px;
-        margin: 20px 0;
+        margin: 25px 0;
         overflow-x: auto;
-        border: 2px solid #e9ecef;
     }
 
     .mermaid {
         text-align: center;
     }
 
-    .structure-grid {
+    .info-grid {
         display: grid;
-        grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
+        grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
         gap: 25px;
-        margin: 30px 0;
+        margin: 25px 0;
     }
 
-    .structure-card {
+    .info-card {
         background: linear-gradient(135deg, #f8f9fa 0%, #e9ecef 100%);
-        border-radius: 12px;
+        border-radius: 10px;
         padding: 25px;
-        box-shadow: 0 8px 16px rgba(0,0,0,0.1);
-        transition: all 0.3s ease;
-        border: 2px solid transparent;
+        border: 2px solid #e9ecef;
+        box-shadow: 0 4px 8px rgba(0,0,0,0.1);
     }
 
-    .structure-card:hover {
-        transform: translateY(-5px);
-        box-shadow: 0 15px 30px rgba(0,0,0,0.15);
-        border-color: #3498db;
-    }
-
-    .structure-card h3 {
+    .info-card h4 {
         color: #2c3e50;
         margin-bottom: 15px;
         font-size: 1.3em;
-        border-bottom: 3px solid #3498db;
-        padding-bottom: 10px;
+        border-bottom: 2px solid #3498db;
+        padding-bottom: 8px;
     }
 
-    .page-hierarchy {
+    .info-card ul {
         list-style: none;
-        margin-left: 0;
     }
 
-    .page-hierarchy li {
-        padding: 5px 0;
-        color: #555;
+    .info-card li {
+        margin-bottom: 8px;
+        padding-left: 20px;
         position: relative;
-        padding-left: 20px;
     }
 
-    .page-hierarchy > li {
-        font-weight: bold;
-        color: #2c3e50;
-        margin-bottom: 10px;
-    }
-
-    .page-hierarchy > li > ul {
-        list-style: none;
-        margin-top: 5px;
-    }
-
-    .page-hierarchy > li > ul > li {
-        font-weight: normal;
-        color: #666;
-        padding-left: 20px;
-        border-left: 2px solid #ddd;
-        margin-left: 10px;
-    }
-
-    .page-hierarchy > li > ul > li:before {
-        content: "└";
+    .info-card li:before {
+        content: "▶";
         color: #3498db;
         position: absolute;
         left: 0;
+        top: 0;
     }
 
-    .wireframe-section {
-        background: white;
-        border: 2px solid #e9ecef;
-        border-radius: 10px;
-        padding: 20px;
-        margin: 20px 0;
-    }
-
-    .wireframe-section h3 {
-        color: #2c3e50;
-        margin-bottom: 15px;
-        padding-bottom: 10px;
-        border-bottom: 2px solid #3498db;
-    }
-
-    .component-grid {
-        display: grid;
-        grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
-        gap: 15px;
-        margin-top: 15px;
-    }
-
-    .component {
-        background: #f8f9fa;
-        border: 1px solid #dee2e6;
-        border-radius: 8px;
-        padding: 15px;
-        text-align: center;
-        font-size: 0.9em;
-        color: #495057;
-        transition: all 0.3s ease;
-    }
-
-    .component:hover {
-        background: #e9ecef;
-        transform: translateY(-2px);
-    }
-
-    .flow-step {
-        background: #3498db;
-        color: white;
-        padding: 10px 20px;
-        border-radius: 25px;
-        display: inline-block;
-        margin: 5px;
-        font-weight: bold;
-        font-size: 0.9em;
-    }
-
-    .integration-box {
+    .feature-list {
         background: #fff3cd;
         border: 2px solid #ffeaa7;
         border-radius: 10px;
@@ -228,43 +172,133 @@ box-sizing: border-box;
         margin: 20px 0;
     }
 
-    .integration-box h4 {
+    .feature-list h4 {
         color: #856404;
-        margin-bottom: 10px;
+        margin-bottom: 15px;
     }
 
-    .tech-stack {
-        display: flex;
-        flex-wrap: wrap;
-        gap: 10px;
+    .feature-grid {
+        display: grid;
+        grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+        gap: 15px;
         margin-top: 15px;
     }
 
-    .tech-item {
+    .feature-item {
         background: #17a2b8;
         color: white;
-        padding: 8px 15px;
-        border-radius: 20px;
-        font-size: 0.85em;
+        padding: 12px 18px;
+        border-radius: 25px;
+        font-size: 0.9em;
+        font-weight: 600;
+        text-align: center;
+    }
+
+    .data-table {
+        width: 100%;
+        border-collapse: collapse;
+        margin: 20px 0;
+        background: white;
+        box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+        border-radius: 8px;
+        overflow: hidden;
+    }
+
+    .data-table th {
+        background: #3498db;
+        color: white;
+        padding: 15px;
+        text-align: left;
+        font-weight: 600;
+    }
+
+    .data-table td {
+        padding: 12px 15px;
+        border-bottom: 1px solid #e9ecef;
+    }
+
+    .data-table tr:nth-child(even) {
+        background: #f8f9fa;
+    }
+
+    .data-table tr:hover {
+        background: #e3f2fd;
+    }
+
+    .highlight-box {
+        background: linear-gradient(135deg, #e3f2fd 0%, #bbdefb 100%);
+        border: 2px solid #2196f3;
+        border-radius: 10px;
+        padding: 20px;
+        margin: 20px 0;
+    }
+
+    .highlight-box h4 {
+        color: #1565c0;
+        margin-bottom: 10px;
+    }
+
+    .code-block {
+        background: #2c3e50;
+        color: #ecf0f1;
+        padding: 20px;
+        border-radius: 8px;
+        font-family: 'Courier New', monospace;
+        overflow-x: auto;
+        margin: 15px 0;
+    }
+
+    .roadmap {
+        display: grid;
+        grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+        gap: 20px;
+        margin: 25px 0;
+    }
+
+    .roadmap-phase {
+        background: white;
+        border: 2px solid #3498db;
+        border-radius: 10px;
+        padding: 20px;
+        position: relative;
+    }
+
+    .roadmap-phase h4 {
+        background: #3498db;
+        color: white;
+        margin: -20px -20px 15px -20px;
+        padding: 15px 20px;
+        border-radius: 8px 8px 0 0;
+    }
+
+    .status-badge {
+        display: inline-block;
+        padding: 4px 12px;
+        border-radius: 15px;
+        font-size: 0.8em;
         font-weight: bold;
+        margin-left: 10px;
+    }
+
+    .status-planning { background: #fff3cd; color: #856404; }
+    .status-development { background: #d1ecf1; color: #0c5460; }
+    .status-testing { background: #f8d7da; color: #721c24; }
+    .status-complete { background: #d4edda; color: #155724; }
+
+    @media print {
+        body { background: white; }
+        .document-container { box-shadow: none; }
+        .section { page-break-inside: avoid; }
+        .mermaid-container { page-break-inside: avoid; }
     }
 
     @media (max-width: 768px) {
-        .nav-tabs {
-            flex-direction: column;
-        }
-
-        .tab-content {
-            padding: 15px;
-        }
-
-        .structure-grid {
-            grid-template-columns: 1fr;
-        }
-
-        .mermaid-container {
-            padding: 10px;
-        }
+        .header { padding: 20px; }
+        .header h1 { font-size: 1.8em; }
+        .content { padding: 20px; }
+        .toc ul { columns: 1; }
+        .info-grid { grid-template-columns: 1fr; }
+        .feature-grid { grid-template-columns: 1fr; }
     }
 </style>
 
@@ -272,596 +306,1050 @@ box-sizing: border-box;
 
 </head>
 <body>
-<div class="container">
-<div class="header">
-<h1>企業ウェブサイト構造図</h1>
-<p>多事業展開企業のための統合ウェブプラットフォーム設計案</p>
+<div class="document-container">
+<header class="header">
+<h1>企業ウェブサイト構造図・ワイヤーフレーム</h1>
+<p class="subtitle">多事業展開企業のための統合ウェブプラットフォーム設計ドキュメント</p>
+</header>
+
+```
+    <nav class="toc">
+        <h2>📋 目次 - Table of Contents</h2>
+        <ul>
+            <li><a href="#overview">1. 全体サイト構造概要</a></li>
+            <li><a href="#corporate">2. メインコーポレートサイト</a></li>
+            <li><a href="#realestate">3. 不動産開発事業サイト</a></li>
+            <li><a href="#hospitality">4. 民泊・ホテル事業サイト</a></li>
+            <li><a href="#restaurant">5. 飲食店事業サイト</a></li>
+            <li><a href="#hire">6. ハイヤー事業サイト</a></li>
+            <li><a href="#branding">7. ブランディングサイト</a></li>
+            <li><a href="#marketing">8. マーケティングLP戦略</a></li>
+            <li><a href="#technology">9. 技術実装・システム統合</a></li>
+            <li><a href="#roadmap">10. 実装ロードマップ</a></li>
+        </ul>
+    </nav>
+
+    <main class="content">
+        <section id="overview" class="section">
+            <h2>🔗 1. 全体サイト構造概要</h2>
+
+            <h3>📍 メインドメイン構成</h3>
+            <div class="info-grid">
+                <div class="info-card">
+                    <h4>🏢 コーポレートサイト</h4>
+                    <ul>
+                        <li>ドメイン: corporate.company.com</li>
+                        <li>役割: 企業情報・IR・採用の統合ハブ</li>
+                        <li>機能: 各事業サイトへのゲートウェイ</li>
+                    </ul>
+                </div>
+
+                <div class="info-card">
+                    <h4>🏗️ 不動産開発事業</h4>
+                    <ul>
+                        <li>ドメイン: realestate.company.com</li>
+                        <li>役割: 投資家・パートナー向けプラットフォーム</li>
+                        <li>機能: プロジェクト管理・投資シミュレーション</li>
+                    </ul>
+                </div>
+
+                <div class="info-card">
+                    <h4>🏨 民泊・ホテル事業</h4>
+                    <ul>
+                        <li>ドメイン: hotels.company.com</li>
+                        <li>役割: 宿泊予約・ゲストサービス</li>
+                        <li>機能: 予約管理・多言語対応・レビューシステム</li>
+                    </ul>
+                </div>
+
+                <div class="info-card">
+                    <h4>🍽️ 飲食店事業</h4>
+                    <ul>
+                        <li>ドメイン: restaurants.company.com</li>
+                        <li>役割: 店舗予約・メニュー紹介</li>
+                        <li>機能: 席予約・デリバリー連携・イベント管理</li>
+                    </ul>
+                </div>
+
+                <div class="info-card">
+                    <h4>🚗 ハイヤー事業</h4>
+                    <ul>
+                        <li>ドメイン: hire.company.com</li>
+                        <li>役割: 配車サービス・法人契約</li>
+                        <li>機能: リアルタイム配車・GPS追跡・自動料金計算</li>
+                    </ul>
+                </div>
+
+                <div class="info-card">
+                    <h4>✨ ブランディングサイト</h4>
+                    <ul>
+                        <li>ドメイン: brand.company.com</li>
+                        <li>役割: 企業価値・理念の発信</li>
+                        <li>機能: ブランドストーリー・CSR活動紹介</li>
+                    </ul>
+                </div>
+            </div>
+
+            <h3>🔄 サイト間連携構造図</h3>
+            <div class="mermaid-container">
+                <div class="mermaid">
+                graph TD
+                    A[メインコーポレートサイト<br/>corporate.company.com] --> B[不動産開発事業<br/>realestate.company.com]
+                    A --> C[民泊・ホテル事業<br/>hotels.company.com]
+                    A --> D[飲食店事業<br/>restaurants.company.com]
+                    A --> E[ハイヤー事業<br/>hire.company.com]
+                    A --> F[ブランディングサイト<br/>brand.company.com]
+
+                    B --> B1[開発実績]
+                    B --> B2[進行中プロジェクト]
+                    B --> B3[投資家情報]
+
+                    C --> C1[ホテル一覧]
+                    C --> C2[個別ホテルLP]
+                    C --> C3[予約システム]
+
+                    D --> D1[店舗一覧]
+                    D --> D2[メニュー・予約]
+                    D --> D3[イベント情報]
+
+                    E --> E1[サービス紹介]
+                    E --> E2[リアルタイム予約]
+                    E --> E3[法人契約]
+
+                    F --> F1[ブランドストーリー]
+                    F --> F2[社会貢献]
+                    F --> F3[企業価値]
+
+                    style A fill:#e1f5fe
+                    style B fill:#f3e5f5
+                    style C fill:#e8f5e8
+                    style D fill:#fff3e0
+                    style E fill:#fce4ec
+                    style F fill:#f1f8e9
+                </div>
+            </div>
+        </section>
+
+        <section id="corporate" class="section">
+            <h2>🏢 2. メインコーポレートサイト構造</h2>
+
+            <h3>📄 ページ階層構造</h3>
+            <div class="mermaid-container">
+                <div class="mermaid">
+                graph TD
+                    A[トップページ] --> B[企業情報]
+                    A --> C[事業紹介]
+                    A --> D[IR情報]
+                    A --> E[ニュース]
+                    A --> F[採用情報]
+                    A --> G[お問い合わせ]
+
+                    B --> B1[会社概要]
+                    B --> B2[代表メッセージ]
+                    B --> B3[沿革]
+                    B --> B4[組織図]
+
+                    C --> C1[不動産開発事業へ]
+                    C --> C2[民泊・ホテル事業へ]
+                    C --> C3[飲食店事業へ]
+                    C --> C4[ハイヤー事業へ]
+
+                    D --> D1[決算情報]
+                    D --> D2[株主総会]
+                    D --> D3[IR資料ダウンロード]
+
+                    E --> E1[プレスリリース]
+                    E --> E2[メディア掲載]
+                    E --> E3[お知らせ]
+
+                    F --> F1[新卒採用]
+                    F --> F2[中途採用]
+                    F --> F3[福利厚生]
+
+                    style A fill:#e1f5fe
+                    style C1 fill:#f3e5f5
+                    style C2 fill:#e8f5e8
+                    style C3 fill:#fff3e0
+                    style C4 fill:#fce4ec
+                </div>
+            </div>
+
+            <h3>🎯 メインページ構成要素</h3>
+            <table class="data-table">
+                <thead>
+                    <tr>
+                        <th>要素</th>
+                        <th>説明</th>
+                        <th>主要機能</th>
+                        <th>目的</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td>ヘッダーナビゲーション</td>
+                        <td>全事業へのリンク</td>
+                        <td>グローバルナビゲーション</td>
+                        <td>サイト間回遊促進</td>
+                    </tr>
+                    <tr>
+                        <td>メインビジュアル</td>
+                        <td>企業メッセージ動画</td>
+                        <td>ブランド訴求</td>
+                        <td>第一印象形成</td>
+                    </tr>
+                    <tr>
+                        <td>事業紹介セクション</td>
+                        <td>4事業のハイライト</td>
+                        <td>各事業サイトへの導線</td>
+                        <td>事業理解促進</td>
+                    </tr>
+                    <tr>
+                        <td>最新ニュース</td>
+                        <td>3-5件表示</td>
+                        <td>情報発信</td>
+                        <td>企業活動アピール</td>
+                    </tr>
+                    <tr>
+                        <td>IR情報ハイライト</td>
+                        <td>決算・株価等</td>
+                        <td>投資家向け情報</td>
+                        <td>投資価値アピール</td>
+                    </tr>
+                    <tr>
+                        <td>フッター</td>
+                        <td>サイトマップ・SNS</td>
+                        <td>補完ナビゲーション</td>
+                        <td>情報網羅性</td>
+                    </tr>
+                </tbody>
+            </table>
+        </section>
+
+        <section id="realestate" class="section">
+            <h2>🏗️ 3. 不動産開発事業サイト詳細構造</h2>
+
+            <h3>🔧 システム構成図</h3>
+            <div class="mermaid-container">
+                <div class="mermaid">
+                graph TD
+                    A[不動産開発事業プラットフォーム] --> B[投資家向け機能]
+                    A --> C[プロジェクト管理]
+                    A --> D[販売・マーケティング]
+                    A --> E[パートナー連携]
+
+                    B --> B1[ダッシュボード]
+                    B --> B2[収益レポート]
+                    B --> B3[リスク分析]
+                    B --> B4[税務シミュレーター]
+                    B --> B5[契約書電子署名]
+
+                    C --> C1[進捗管理カンバン]
+                    C --> C2[建築現場ライブカメラ]
+                    C --> C3[工程表ガントチャート]
+                    C --> C4[予算管理・原価追跡]
+                    C --> C5[品質管理チェックリスト]
+
+                    D --> D1[物件比較ツール]
+                    D --> D2[VR・AR物件見学]
+                    D --> D3[ローン計算機]
+                    D --> D4[エリア分析データ]
+                    D --> D5[リードスコアリング]
+
+                    E --> E1[パートナー要件審査]
+                    E --> E2[提携事例紹介]
+                    E --> E3[申請フォーム]
+                    E --> E4[契約管理]
+                    E --> E5[共同事業管理]
+
+                    style A fill:#f3e5f5
+                    style B fill:#e3f2fd
+                    style C fill:#e8f5e8
+                    style D fill:#fff3e0
+                    style E fill:#fce4ec
+                </div>
+            </div>
+
+            <h3>📊 投資家向け機能詳細</h3>
+            <div class="info-grid">
+                <div class="info-card">
+                    <h4>🔹 ダッシュボード機能</h4>
+                    <ul>
+                        <li>投資状況一覧（保有物件リスト）</li>
+                        <li>投資総額・現在価値表示</li>
+                        <li>利回り実績グラフ</li>
+                        <li>ポートフォリオ分析</li>
+                        <li>地域別分散状況</li>
+                        <li>リスク分散度評価</li>
+                    </ul>
+                </div>
+
+                <div class="info-card">
+                    <h4>🔹 収益レポート</h4>
+                    <ul>
+                        <li>月次・四半期・年次レポート自動生成</li>
+                        <li>収益構造詳細分析</li>
+                        <li>市場比較データ</li>
+                        <li>実現利回り計算</li>
+                        <li>予想収益シミュレーション</li>
+                        <li>税引き後利回り表示</li>
+                    </ul>
+                </div>
+
+                <div class="info-card">
+                    <h4>🔹 リスク分析ツール</h4>
+                    <ul>
+                        <li>不動産価格変動リスク</li>
+                        <li>金利上昇リスク評価</li>
+                        <li>流動性リスク分析</li>
+                        <li>地震・洪水リスクマップ</li>
+                        <li>保険カバレッジ確認</li>
+                        <li>災害時価値変動予測</li>
+                    </ul>
+                </div>
+            </div>
+
+            <h3>🎯 マーケティングLP構造</h3>
+            <table class="data-table">
+                <thead>
+                    <tr>
+                        <th>LP種類</th>
+                        <th>ターゲット</th>
+                        <th>主要コンテンツ</th>
+                        <th>特別機能</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td>ROI計算機付きLP</td>
+                        <td>個人投資家</td>
+                        <td>リアルタイム収益予測、過去実績</td>
+                        <td>投資シミュレーター</td>
+                    </tr>
+                    <tr>
+                        <td>リスク説明LP</td>
+                        <td>慎重な投資家</td>
+                        <td>リスク分析、対策説明</td>
+                        <td>リスク評価ツール</td>
+                    </tr>
+                    <tr>
+                        <td>新築マンションLP</td>
+                        <td>居住用物件投資家</td>
+                        <td>VR内覧、周辺環境紹介</td>
+                        <td>バーチャル見学</td>
+                    </tr>
+                    <tr>
+                        <td>商業施設LP</td>
+                        <td>収益物件投資家</td>
+                        <td>テナント情報、収益性分析</td>
+                        <td>収益予測モデル</td>
+                    </tr>
+                </tbody>
+            </table>
+        </section>
+
+        <section id="hospitality" class="section">
+            <h2>🏨 4. 民泊・ホテル事業サイト詳細構造</h2>
+
+            <h3>🔧 システム構成図</h3>
+            <div class="mermaid-container">
+                <div class="mermaid">
+                graph TD
+                    A[ホテル・民泊プラットフォーム] --> B[予約管理システム]
+                    A --> C[ゲストサービス]
+                    A --> D[運営効率化]
+                    A --> E[マーケティング機能]
+
+                    B --> B1[リアルタイム在庫同期]
+                    B --> B2[動的価格設定]
+                    B --> B3[オーバーブッキング防止]
+                    B --> B4[キャンセル・返金処理]
+                    B --> B5[グループ予約管理]
+
+                    C --> C1[チェックイン・アウト自動化]
+                    C --> C2[デジタルコンシェルジュ]
+                    C --> C3[多言語チャットボット]
+                    C --> C4[ルームサービス注文]
+                    C --> C5[周辺観光情報]
+
+                    D --> D1[清掃スケジュール最適化]
+                    D --> D2[備品在庫管理]
+                    D --> D3[スタッフシフト管理]
+                    D --> D4[エネルギー監視]
+                    D --> D5[収益分析]
+
+                    E --> E1[ターゲット別LP]
+                    E --> E2[エリア特化LP]
+                    E --> E3[体験型LP]
+                    E --> E4[デジタルマーケティング]
+                    E --> E5[レビュー管理]
+
+                    style A fill:#e8f5e8
+                    style B fill:#e3f2fd
+                    style C fill:#fff3e0
+                    style D fill:#f3e5f5
+                    style E fill:#fce4ec
+                </div>
+            </div>
+
+            <h3>📱 予約管理システム詳細</h3>
+            <div class="highlight-box">
+                <h4>🔹 リアルタイム在庫同期機能</h4>
+                <p><strong>在庫管理API:</strong> 複数サイト在庫連携、リアルタイム更新、在庫アロケーション管理</p>
+                <p><strong>外部サイト連携:</strong> Booking.com連携、Expedia連携、自社サイト優先制御</p>
+            </div>
+
+            <div class="highlight-box">
+                <h4>🔹 動的価格設定エンジン</h4>
+                <p><strong>需要予測AI:</strong> 過去データ学習、イベント・季節要因考慮、競合価格分析</p>
+                <p><strong>収益最大化:</strong> レベニューマネジメント、早期予約割引制御、直前割引自動設定</p>
+            </div>
+
+            <h3>🎯 ターゲット別マーケティングLP</h3>
+            <table class="data-table">
+                <thead>
+                    <tr>
+                        <th>LP種類</th>
+                        <th>ターゲット</th>
+                        <th>訴求ポイント</th>
+                        <th>特別機能</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td>ビジネス出張者LP</td>
+                        <td>出張者</td>
+                        <td>駅近・WiFi・朝食</td>
+                        <td>領収書発行、法人契約</td>
+                    </tr>
+                    <tr>
+                        <td>外国人観光客LP</td>
+                        <td>海外旅行者</td>
+                        <td>多言語・文化体験</td>
+                        <td>多通貨決済、観光案内</td>
+                    </tr>
+                    <tr>
+                        <td>カップル向けLP</td>
+                        <td>恋人・夫婦</td>
+                        <td>ロマンチック・記念日</td>
+                        <td>アニバーサリープラン</td>
+                    </tr>
+                    <tr>
+                        <td>家族旅行LP</td>
+                        <td>ファミリー</td>
+                        <td>子供向けサービス</td>
+                        <td>キッズアメニティ</td>
+                    </tr>
+                </tbody>
+            </table>
+        </section>
+
+        <section id="restaurant" class="section">
+            <h2>🍽️ 5. 飲食店事業サイト詳細構造</h2>
+
+            <h3>🔧 システム構成図</h3>
+            <div class="mermaid-container">
+                <div class="mermaid">
+                graph TD
+                    A[飲食店事業プラットフォーム] --> B[店舗運営システム]
+                    A --> C[顧客体験向上]
+                    A --> D[デリバリー統合]
+                    A --> E[マーケティング機能]
+
+                    B --> B1[POS・会計連携]
+                    B --> B2[在庫・発注管理]
+                    B --> B3[シフト・勤怠管理]
+                    B --> B4[売上分析・予測]
+                    B --> B5[食材ロス管理]
+
+                    C --> C1[QRコードメニュー]
+                    C --> C2[事前注文・決済]
+                    C --> C3[アレルギー・好み管理]
+                    C --> C4[待ち時間通知]
+                    C --> C5[ロイヤルティプログラム]
+
+                    D --> D1[配達パートナー連携]
+                    D --> D2[配達時間最適化]
+                    D --> D3[温度管理・品質保持]
+                    D --> D4[配達状況追跡]
+                    D --> D5[評価システム]
+
+                    E --> E1[店舗別LP]
+                    E --> E2[イベント特化LP]
+                    E --> E3[オムニチャネル戦略]
+                    E --> E4[SNS連携]
+                    E --> E5[口コミ管理]
+
+                    style A fill:#fff3e0
+                    style B fill:#e3f2fd
+                    style C fill:#e8f5e8
+                    style D fill:#f3e5f5
+                    style E fill:#fce4ec
+                </div>
+            </div>
+
+            <h3>🍴 店舗運営システム詳細</h3>
+            <div class="info-grid">
+                <div class="info-card">
+                    <h4>🔹 POS・会計システム連携</h4>
+                    <ul>
+                        <li>店舗別売上集計</li>
+                        <li>時間帯別分析</li>
+                        <li>メニュー別売上ランキング</li>
+                        <li>自動仕訳生成</li>
+                        <li>税務申告データ作成</li>
+                        <li>原価計算・利益分析</li>
+                    </ul>
+                </div>
+
+                <div class="info-card">
+                    <h4>🔹 在庫・発注管理</h4>
+                    <ul>
+                        <li>在庫下限アラート</li>
+                        <li>発注量最適化</li>
+                        <li>仕入先比較・選定</li>
+                        <li>廃棄量記録・分析</li>
+                        <li>消費期限管理</li>
+                        <li>メニュー調整提案</li>
+                    </ul>
+                </div>
+
+                <div class="info-card">
+                    <h4>🔹 顧客体験向上機能</h4>
+                    <ul>
+                        <li>多言語QRメニュー</li>
+                        <li>カロリー・栄養表示</li>
+                        <li>アレルギー情報管理</li>
+                        <li>個人嗜好学習</li>
+                        <li>待ち時間SMS通知</li>
+                        <li>ポイント・特典管理</li>
+                    </ul>
+                </div>
+            </div>
+
+            <h3>🎯 ターゲット別マーケティングLP</h3>
+            <table class="data-table">
+                <thead>
+                    <tr>
+                        <th>LP種類</th>
+                        <th>ターゲット</th>
+                        <th>特徴</th>
+                        <th>主要機能</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td>ウェディングLP</td>
+                        <td>新郎新婦</td>
+                        <td>貸切・特別演出</td>
+                        <td>会場見学予約、プラン比較</td>
+                    </tr>
+                    <tr>
+                        <td>企業宴会LP</td>
+                        <td>法人担当者</td>
+                        <td>大人数対応・ビジネス仕様</td>
+                        <td>見積もり依頼、法人契約</td>
+                    </tr>
+                    <tr>
+                        <td>デートプランLP</td>
+                        <td>カップル</td>
+                        <td>個室・記念日コース</td>
+                        <td>記念日登録、サプライズ対応</td>
+                    </tr>
+                    <tr>
+                        <td>ファミリーLP</td>
+                        <td>家族連れ</td>
+                        <td>子供向けメニュー・座敷</td>
+                        <td>子供料金、アレルギー対応</td>
+                    </tr>
+                </tbody>
+            </table>
+        </section>
+
+        <section id="hire" class="section">
+            <h2>🚗 6. ハイヤー事業サイト詳細構造</h2>
+
+            <h3>🔧 システム構成図</h3>
+            <div class="mermaid-container">
+                <div class="mermaid">
+                graph TD
+                    A[ハイヤー事業プラットフォーム] --> B[配車システム]
+                    A --> C[顧客管理]
+                    A --> D[ドライバー管理]
+                    A --> E[法人営業機能]
+                    A --> F[マーケティング機能]
+
+                    B --> B1[リアルタイム配車]
+                    B --> B2[自動料金計算]
+                    B --> B3[ルート最適化]
+                    B --> B4[GPS追跡システム]
+                    B --> B5[決済処理]
+
+                    C --> C1[顧客プロファイル管理]
+                    C --> C2[利用履歴分析]
+                    C --> C3[嗜好・要望管理]
+                    C --> C4[ロイヤルティプログラム]
+                    C --> C5[多言語対応]
+
+                    D --> D1[ドライバー登録・審査]
+                    D --> D2[スケジュール管理]
+                    D --> D3[売上・評価管理]
+                    D --> D4[研修・教育]
+                    D --> D5[車両管理]
+
+                    E --> E1[企業契約管理]
+                    E --> E2[利用実績レポート]
+                    E --> E3[請求・決済]
+                    E --> E4[専用サービス]
+                    E --> E5[API連携]
+
+                    F --> F1[サービス別LP]
+                    F --> F2[ターゲット別LP]
+                    F --> F3[デジタルマーケティング]
+                    F --> F4[口コミ・評価]
+                    F --> F5[紹介プログラム]
+
+                    style A fill:#fce4ec
+                    style B fill:#e3f2fd
+                    style C fill:#e8f5e8
+                    style D fill:#fff3e0
+                    style E fill:#f3e5f5
+                    style F fill:#f1f8e9
+                </div>
+            </div>
+
+            <h3>🚙 配車システム詳細</h3>
+            <div class="highlight-box">
+                <h4>🔹 リアルタイム配車機能</h4>
+                <p><strong>最適ドライバー選択:</strong> 位置情報ベース選択、ドライバー評価考慮、車種・サービスマッチング</p>
+                <p><strong>即時配車確認:</strong> 30秒以内配車確定、到着時間予測表示、変更・キャンセル対応</p>
+            </div>
+
+            <div class="highlight-box">
+                <h4>🔹 自動料金計算</h4>
+                <p><strong>距離・時間料金:</strong> GPS走行距離計測、交通状況考慮時間計算、深夜・早朝割増自動適用</p>
+                <p><strong>オプション料金:</strong> 待機料金計算、高速道路料金、特別車両料金</p>
+            </div>
+
+            <h3>🎯 サービス別マーケティングLP</h3>
+            <table class="data-table">
+                <thead>
+                    <tr>
+                        <th>LP種類</th>
+                        <th>ターゲット</th>
+                        <th>特徴</th>
+                        <th>特別サービス</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td>空港送迎LP</td>
+                        <td>海外出張者</td>
+                        <td>定時運行・荷物サポート</td>
+                        <td>フライト連携、多言語対応</td>
+                    </tr>
+                    <tr>
+                        <td>観光ツアーLP</td>
+                        <td>観光客</td>
+                        <td>ガイド付き・写真撮影</td>
+                        <td>観光ルート提案、記念撮影</td>
+                    </tr>
+                    <tr>
+                        <td>ビジネス送迎LP</td>
+                        <td>企業役員</td>
+                        <td>VIP対応・機密保持</td>
+                        <td>セキュリティ対応、専用車両</td>
+                    </tr>
+                    <tr>
+                        <td>結婚式送迎LP</td>
+                        <td>新郎新婦</td>
+                        <td>装飾車・記念撮影</td>
+                        <td>ウェディング装飾、撮影サービス</td>
+                    </tr>
+                </tbody>
+            </table>
+        </section>
+
+        <section id="branding" class="section">
+            <h2>✨ 7. ブランディングサイト詳細構造</h2>
+
+            <h3>🔧 システム構成図</h3>
+            <div class="mermaid-container">
+                <div class="mermaid">
+                graph TD
+                    A[ブランディングプラットフォーム] --> B[ブランドストーリー]
+                    A --> C[企業価値・理念]
+                    A --> D[ステークホルダー別コンテンツ]
+                    A --> E[メディア・広報]
+                    A --> F[インタラクティブ要素]
+
+                    B --> B1[創業ストーリー]
+                    B --> B2[ビジョン・ミッション]
+                    B --> B3[価値観・企業文化]
+                    B --> B4[経営陣メッセージ]
+                    B --> B5[企業沿革]
+
+                    C --> C1[持続可能性への取組み]
+                    C --> C2[社会貢献活動]
+                    C --> C3[イノベーション事例]
+                    C --> C4[地域貢献]
+                    C --> C5[環境保護活動]
+
+                    D --> D1[投資家向け]
+                    D --> D2[求職者向け]
+                    D --> D3[取引先向け]
+                    D --> D4[地域住民向け]
+                    D --> D5[メディア向け]
+
+                    E --> E1[プレス・メディアキット]
+                    E --> E2[取材・インタビュー]
+                    E --> E3[受賞歴・認定]
+                    E --> E4[メディア露出実績]
+                    E --> E5[広報活動]
+
+                    F --> F1[価値観診断]
+                    F --> F2[バーチャル企業見学]
+                    F --> F3[インタラクティブコンテンツ]
+                    F --> F4[SNS連携]
+                    F --> F5[動画コンテンツ]
+
+                    style A fill:#f1f8e9
+                    style B fill:#e8f5e8
+                    style C fill:#e3f2fd
+                    style D fill:#fff3e0
+                    style E fill:#f3e5f5
+                    style F fill:#fce4ec
+                </div>
+            </div>
+
+            <h3>🎯 ステークホルダー別コンテンツ</h3>
+            <div class="info-grid">
+                <div class="info-card">
+                    <h4>🔸 投資家向けコンテンツ</h4>
+                    <ul>
+                        <li>中長期戦略（5年・10年ビジョン）</li>
+                        <li>ESG取組み（環境・社会・ガバナンス）</li>
+                        <li>財務ハイライト（主要指標・業績推移）</li>
+                        <li>成長戦略・収益モデル</li>
+                        <li>リスク管理・コンプライアンス</li>
+                    </ul>
+                </div>
+
+                <div class="info-card">
+                    <h4>🔸 求職者向けコンテンツ</h4>
+                    <ul>
+                        <li>社員インタビュー（各部署の声）</li>
+                        <li>キャリアパス・成長機会</li>
+                        <li>福利厚生・働く環境</li>
+                        <li>研修制度・スキルアップ支援</li>
+                        <li>ワークライフバランス</li>
+                    </ul>
+                </div>
+
+                <div class="info-card">
+                    <h4>🔸 取引先向けコンテンツ</h4>
+                    <ul>
+                        <li>パートナーシップ事例</li>
+                        <li>取引実績・信頼性</li>
+                        <li>協業メリット・価値提案</li>
+                        <li>品質管理・コンプライアンス</li>
+                        <li>サプライチェーン管理</li>
+                    </ul>
+                </div>
+            </div>
+        </section>
+
+        <section id="marketing" class="section">
+            <h2>📊 8. マーケティングLP統合戦略</h2>
+
+            <h3>🎯 コンバージョン最適化</h3>
+            <div class="feature-list">
+                <h4>🔧 A/Bテスト実施項目</h4>
+                <div class="feature-grid">
+                    <div class="feature-item">見出し・キャッチコピー</div>
+                    <div class="feature-item">CTA（行動促進ボタン）</div>
+                    <div class="feature-item">ページレイアウト</div>
+                    <div class="feature-item">画像・動画コンテンツ</div>
+                    <div class="feature-item">フォーム項目</div>
+                    <div class="feature-item">価格表示方法</div>
+                </div>
+            </div>
+
+            <h3>📈 事業間シナジー創出</h3>
+            <table class="data-table">
+                <thead>
+                    <tr>
+                        <th>主事業</th>
+                        <th>クロスセル先</th>
+                        <th>提案内容</th>
+                        <th>期待効果</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td>不動産開発</td>
+                        <td>ホテル事業</td>
+                        <td>物件近隣ホテル利用特典</td>
+                        <td>顧客満足度向上</td>
+                    </tr>
+                    <tr>
+                        <td>ホテル事業</td>
+                        <td>飲食店事業</td>
+                        <td>宿泊客向け飲食特典</td>
+                        <td>客単価向上</td>
+                    </tr>
+                    <tr>
+                        <td>飲食店事業</td>
+                        <td>ハイヤー事業</td>
+                        <td>帰宅時送迎サービス</td>
+                        <td>サービス向上</td>
+                    </tr>
+                    <tr>
+                        <td>ハイヤー事業</td>
+                        <td>全事業</td>
+                        <td>移動サービス連携</td>
+                        <td>利便性向上</td>
+                    </tr>
+                </tbody>
+            </table>
+
+            <h3>🎖️ 統合ロイヤルティプログラム</h3>
+            <table class="data-table">
+                <thead>
+                    <tr>
+                        <th>レベル</th>
+                        <th>条件</th>
+                        <th>特典内容</th>
+                        <th>追加サービス</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td>ブロンズ</td>
+                        <td>年間10万円利用</td>
+                        <td>各事業5%割引</td>
+                        <td>基本特典</td>
+                    </tr>
+                    <tr>
+                        <td>シルバー</td>
+                        <td>年間50万円利用</td>
+                        <td>各事業10%割引、優先予約</td>
+                        <td>専用サポート窓口</td>
+                    </tr>
+                    <tr>
+                        <td>ゴールド</td>
+                        <td>年間100万円利用</td>
+                        <td>各事業15%割引、専用サポート</td>
+                        <td>限定イベント招待</td>
+                    </tr>
+                    <tr>
+                        <td>プラチナ</td>
+                        <td>年間300万円利用</td>
+                        <td>各事業20%割引、VIP待遇</td>
+                        <td>コンシェルジュサービス</td>
+                    </tr>
+                </tbody>
+            </table>
+        </section>
+
+        <section id="technology" class="section">
+            <h2>🔧 9. 技術実装・システム統合</h2>
+
+            <h3>📱 推奨技術スタック</h3>
+            <div class="feature-list">
+                <h4>🔸 フロントエンド技術</h4>
+                <div class="code-block">
+
+```
+
+Framework: React.js / Next.js
+State Management: Redux / Zustand
+
+UI Library: Material-UI / Chakra UI
+Styling: Tailwind CSS / Styled Components
+PWA: Service Worker / Web App Manifest
+</div>
 </div>
 
 ```
-    <div class="nav-tabs">
-        <button class="nav-tab active" onclick="showTab('architecture')">サイト構造図</button>
-        <button class="nav-tab" onclick="showTab('userflow')">ユーザーフロー</button>
-        <button class="nav-tab" onclick="showTab('corporate')">コーポレート</button>
-        <button class="nav-tab" onclick="showTab('realestate')">不動産開発</button>
-        <button class="nav-tab" onclick="showTab('hospitality')">民泊・ホテル</button>
-        <button class="nav-tab" onclick="showTab('restaurant')">飲食店</button>
-        <button class="nav-tab" onclick="showTab('hire')">ハイヤー</button>
-        <button class="nav-tab" onclick="showTab('branding')">ブランディング</button>
-        <button class="nav-tab" onclick="showTab('integration')">システム統合</button>
-    </div>
+            <div class="feature-list">
+                <h4>🔸 バックエンド技術</h4>
+                <div class="code-block">
 
-    <div id="architecture" class="tab-content active">
-        <h2 style="color: #2c3e50; margin-bottom: 30px; text-align: center;">全体サイト構造図</h2>
+```
 
-        <div class="mermaid-container">
-            <div class="mermaid">
-            graph TD
-                A[メインコーポレートサイト<br/>corporate.company.com] --> B[不動産開発事業<br/>realestate.company.com]
-                A --> C[民泊・ホテル事業<br/>hotels.company.com]
-                A --> D[飲食店事業<br/>restaurants.company.com]
-                A --> E[ハイヤー事業<br/>hire.company.com]
-                A --> F[ブランディングサイト<br/>brand.company.com]
+Runtime: Node.js
+Framework: Express.js / Fastify
+Database: PostgreSQL (Primary) / Redis (Cache)
+ORM: Prisma / TypeORM
+API: GraphQL / REST API
+Authentication: JWT / OAuth 2.0
+</div>
+</div>
 
-                B --> B1[開発実績]
-                B --> B2[進行中プロジェクト]
-                B --> B3[投資家情報]
+```
+            <div class="feature-list">
+                <h4>🔸 インフラ・デプロイ</h4>
+                <div class="code-block">
 
-                C --> C1[ホテル一覧]
-                C --> C2[個別ホテルLP]
-                C --> C3[予約システム]
-                C2 --> C21[ホテルA詳細]
-                C2 --> C22[ホテルB詳細]
-                C2 --> C23[ホテルC詳細]
+```
 
-                D --> D1[店舗一覧]
-                D --> D2[メニュー・予約]
-                D --> D3[イベント情報]
+Cloud Platform: AWS / Google Cloud Platform
+Containerization: Docker / Kubernetes
+CDN: CloudFlare / AWS CloudFront
+Monitoring: DataDog / New Relic
+CI/CD: GitHub Actions / GitLab CI
+Load Balancer: AWS ALB / Google Cloud Load Balancing
+</div>
+</div>
 
-                E --> E1[サービス紹介]
-                E --> E2[リアルタイム予約]
-                E --> E3[法人契約]
+```
+            <h3>🔄 マイクロサービス構成</h3>
+            <table class="data-table">
+                <thead>
+                    <tr>
+                        <th>サービス</th>
+                        <th>責任範囲</th>
+                        <th>技術スタック</th>
+                        <th>データベース</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td>User Service</td>
+                        <td>認証・ユーザー管理</td>
+                        <td>Node.js + Express</td>
+                        <td>PostgreSQL</td>
+                    </tr>
+                    <tr>
+                        <td>Booking Service</td>
+                        <td>予約管理</td>
+                        <td>Node.js + Express</td>
+                        <td>PostgreSQL + Redis</td>
+                    </tr>
+                    <tr>
+                        <td>Payment Service</td>
+                        <td>決済処理</td>
+                        <td>Node.js + Stripe API</td>
+                        <td>PostgreSQL</td>
+                    </tr>
+                    <tr>
+                        <td>Notification Service</td>
+                        <td>通知配信</td>
+                        <td>Node.js + Redis</td>
+                        <td>Redis</td>
+                    </tr>
+                    <tr>
+                        <td>Analytics Service</td>
+                        <td>データ分析</td>
+                        <td>Python + BigQuery</td>
+                        <td>BigQuery</td>
+                    </tr>
+                </tbody>
+            </table>
+        </section>
 
-                F --> F1[ブランドストーリー]
-                F --> F2[社会貢献]
-                F --> F3[企業価値]
+        <section id="roadmap" class="section">
+            <h2>📝 10. 実装ロードマップ</h2>
 
-                style A fill:#e1f5fe
-                style B fill:#f3e5f5
-                style C fill:#e8f5e8
-                style D fill:#fff3e0
-                style E fill:#fce4ec
-                style F fill:#f1f8e9
-            </div>
-        </div>
+            <h3>🚀 開発フェーズ計画</h3>
+            <div class="roadmap">
+                <div class="roadmap-phase">
+                    <h4>フェーズ1: 基盤構築<span class="status-badge status-planning">計画中</span></h4>
+                    <p><strong>期間:</strong> 3ヶ月</p>
+                    <ul>
+                        <li><strong>Week 1-4:</strong> 要件定義・設計詳細化</li>
+                        <li><strong>Week 5-8:</strong> 基盤システム開発（認証・決済・CMS）</li>
+                        <li><strong>Week 9-12:</strong> メインコーポレートサイト構築</li>
+                    </ul>
+                    <p><strong>成果物:</strong> コーポレートサイト、基盤API、認証システム</p>
+                </div>
 
-        <div class="structure-grid">
-            <div class="structure-card">
-                <h3>🏢 メインコーポレートサイト</h3>
-                <ul class="page-hierarchy">
-                    <li>トップページ
-                        <ul>
-                            <li>企業概要</li>
-                            <li>代表メッセージ</li>
-                            <li>事業紹介（各事業へのゲートウェイ）</li>
-                        </ul>
-                    </li>
-                    <li>IR情報
-                        <ul>
-                            <li>決算情報</li>
-                            <li>株主総会</li>
-                            <li>IR資料</li>
-                        </ul>
-                    </li>
-                    <li>ニュース・プレス
-                        <ul>
-                            <li>最新ニュース</li>
-                            <li>プレスリリース</li>
-                            <li>メディア掲載</li>
-                        </ul>
-                    </li>
-                    <li>採用情報
-                        <ul>
-                            <li>新卒採用</li>
-                            <li>中途採用</li>
-                            <li>企業文化</li>
-                        </ul>
-                    </li>
-                </ul>
-            </div>
+                <div class="roadmap-phase">
+                    <h4>フェーズ2: 事業サイト構築<span class="status-badge status-development">開発中</span></h4>
+                    <p><strong>期間:</strong> 6ヶ月</p>
+                    <ul>
+                        <li><strong>Month 4-5:</strong> 不動産開発・ホテル事業サイト</li>
+                        <li><strong>Month 6-7:</strong> 飲食店・ハイヤー事業サイト</li>
+                        <li><strong>Month 8-9:</strong> ブランディングサイト・統合テスト</li>
+                    </ul>
+                    <p><strong>成果物:</strong> 全事業サイト、予約システム、決済連携</p>
+                </div>
 
-            <div class="structure-card">
-                <h3>🏗️ 不動産開発事業</h3>
-                <ul class="page-hierarchy">
-                    <li>開発実績
-                        <ul>
-                            <li>完成物件一覧</li>
-                            <li>物件詳細ページ</li>
-                            <li>施工事例</li>
-                        </ul>
-                    </li>
-                    <li>進行中プロジェクト
-                        <ul>
-                            <li>開発予定地</li>
-                            <li>進捗状況</li>
-                            <li>完成予想図</li>
-                        </ul>
-                    </li>
-                    <li>投資・パートナー
-                        <ul>
-                            <li>投資機会</li>
-                            <li>パートナー募集</li>
-                            <li>事業提携</li>
-                        </ul>
-                    </li>
-                </ul>
-            </div>
+                <div class="roadmap-phase">
+                    <h4>フェーズ3: マーケティング機能<span class="status-badge status-testing">テスト中</span></h4>
+                    <p><strong>期間:</strong> 3ヶ月</p>
+                    <ul>
+                        <li><strong>Month 10:</strong> マーケティングLP群構築</li>
+                        <li><strong>Month 11:</strong> 分析基盤・自動化機能</li>
+                        <li><strong>Month 12:</strong> 運用最適化・改善</li>
+                    </ul>
+                    <p><strong>成果物:</strong> LP群、分析ダッシュボード、自動化システム</p>
+                </div>
 
-            <div class="structure-card">
-                <h3>🏨 民泊・ホテル事業</h3>
-                <ul class="page-hierarchy">
-                    <li>ホテル検索・一覧
-                        <ul>
-                            <li>エリア別検索</li>
-                            <li>価格帯フィルター</li>
-                            <li>設備・サービス絞り込み</li>
-                        </ul>
-                    </li>
-                    <li>個別ホテルLP
-                        <ul>
-                            <li>ホテル詳細情報</li>
-                            <li>客室紹介</li>
-                            <li>予約・空室確認</li>
-                        </ul>
-                    </li>
-                    <li>予約管理
-                        <ul>
-                            <li>予約フォーム</li>
-                            <li>決済システム</li>
-                            <li>予約確認・変更</li>
-                        </ul>
-                    </li>
-                </ul>
-            </div>
-        </div>
-    </div>
-
-    <div id="userflow" class="tab-content">
-        <h2 style="color: #2c3e50; margin-bottom: 30px; text-align: center;">ユーザーフロー図</h2>
-
-        <div class="mermaid-container">
-            <div class="mermaid">
-            flowchart TD
-                Start([ユーザー訪問]) --> MainSite{メインサイト}
-
-                MainSite --> Corp[企業情報閲覧]
-                MainSite --> Business[事業紹介から各サイトへ]
-
-                Business --> Hotel[ホテル事業サイト]
-                Business --> Rest[飲食店事業サイト]
-                Business --> Hire[ハイヤー事業サイト]
-                Business --> RealEstate[不動産開発サイト]
-
-                Hotel --> Search1[宿泊先検索]
-                Search1 --> Detail1[ホテル詳細]
-                Detail1 --> Book1[予約・決済]
-
-                Rest --> Search2[店舗検索]
-                Search2 --> Detail2[店舗詳細]
-                Detail2 --> Book2[席予約]
-
-                Hire --> Search3[サービス選択]
-                Search3 --> Detail3[料金確認]
-                Detail3 --> Book3[配車予約]
-
-                RealEstate --> Portfolio[実績閲覧]
-                RealEstate --> Project[プロジェクト情報]
-                RealEstate --> Contact[お問い合わせ]
-
-                Book1 --> Complete([予約完了])
-                Book2 --> Complete
-                Book3 --> Complete
-                Contact --> Complete
-
-                style Start fill:#e8f5e8
-                style Complete fill:#ffeb3b
-                style MainSite fill:#e1f5fe
-            </div>
-        </div>
-
-        <div class="wireframe-section">
-            <h3>🎯 主要ユーザージャーニー</h3>
-            <div style="margin: 20px 0;">
-                <h4 style="color: #2c3e50; margin-bottom: 15px;">宿泊予約フロー</h4>
-                <div class="flow-step">コーポレートサイト訪問</div>
-                <div class="flow-step">→ ホテル事業紹介</div>
-                <div class="flow-step">→ ホテルサイト</div>
-                <div class="flow-step">→ 検索・絞り込み</div>
-                <div class="flow-step">→ ホテル詳細</div>
-                <div class="flow-step">→ 予約・決済</div>
-                <div class="flow-step">→ 完了</div>
+                <div class="roadmap-phase">
+                    <h4>フェーズ4: 運用・最適化<span class="status-badge status-complete">完了</span></h4>
+                    <p><strong>期間:</strong> 継続</p>
+                    <ul>
+                        <li><strong>継続:</strong> パフォーマンス監視・改善</li>
+                        <li><strong>継続:</strong> ユーザーフィードバック対応</li>
+                        <li><strong>継続:</strong> 新機能追加・拡張</li>
+                    </ul>
+                    <p><strong>成果物:</strong> 安定運用、継続改善、事業成長支援</p>
+                </div>
             </div>
 
-            <div style="margin: 20px 0;">
-                <h4 style="color: #2c3e50; margin-bottom: 15px;">投資家・パートナー獲得フロー</h4>
-                <div class="flow-step">コーポレートサイト</div>
-                <div class="flow-step">→ IR情報</div>
-                <div class="flow-step">→ 事業実績</div>
-                <div class="flow-step">→ 不動産開発サイト</div>
-                <div class="flow-step">→ プロジェクト詳細</div>
-                <div class="flow-step">→ お問い合わせ</div>
-            </div>
-        </div>
-    </div>
+            <h3>📊 重要指標（KPI）</h3>
+            <table class="data-table">
+                <thead>
+                    <tr>
+                        <th>カテゴリ</th>
+                        <th>指標</th>
+                        <th>目標値</th>
+                        <th>測定方法</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td>ユーザビリティ</td>
+                        <td>ページ表示速度</td>
+                        <td>3秒以内</td>
+                        <td>Google PageSpeed Insights</td>
+                    </tr>
+                    <tr>
+                        <td>コンバージョン</td>
+                        <td>予約完了率</td>
+                        <td>15%以上</td>
+                        <td>Google Analytics</td>
+                    </tr>
+                    <tr>
+                        <td>事業シナジー</td>
+                        <td>クロスセル率</td>
+                        <td>25%以上</td>
+                        <td>内部分析システム</td>
+                    </tr>
+                    <tr>
+                        <td>顧客満足度</td>
+                        <td>NPS（Net Promoter Score）</td>
+                        <td>50以上</td>
+                        <td>顧客アンケート</td>
+                    </tr>
+                </tbody>
+            </table>
+        </section>
+    </main>
 
-    <div id="corporate" class="tab-content">
-        <h2 style="color: #2c3e50; margin-bottom: 30px;">コーポレートサイト構造</h2>
-
-        <div class="mermaid-container">
-            <div class="mermaid">
-            graph TD
-                A[トップページ] --> B[企業情報]
-                A --> C[事業紹介]
-                A --> D[IR情報]
-                A --> E[ニュース]
-                A --> F[採用情報]
-                A --> G[お問い合わせ]
-
-                B --> B1[会社概要]
-                B --> B2[代表メッセージ]
-                B --> B3[沿革]
-                B --> B4[組織図]
-
-                C --> C1[不動産開発事業へ]
-                C --> C2[民泊・ホテル事業へ]
-                C --> C3[飲食店事業へ]
-                C --> C4[ハイヤー事業へ]
-
-                D --> D1[決算情報]
-                D --> D2[株主総会]
-                D --> D3[IR資料ダウンロード]
-
-                E --> E1[プレスリリース]
-                E --> E2[メディア掲載]
-                E --> E3[お知らせ]
-
-                F --> F1[新卒採用]
-                F --> F2[中途採用]
-                F --> F3[福利厚生]
-
-                style A fill:#e1f5fe
-                style C1 fill:#f3e5f5
-                style C2 fill:#e8f5e8
-                style C3 fill:#fff3e0
-                style C4 fill:#fce4ec
-            </div>
-        </div>
-
-        <div class="wireframe-section">
-            <h3>🏢 メインページ構成要素</h3>
-            <div class="component-grid">
-                <div class="component">ヘッダーナビゲーション<br/>（全事業へのリンク）</div>
-                <div class="component">メインビジュアル<br/>（企業メッセージ動画）</div>
-                <div class="component">事業紹介セクション<br/>（4事業のハイライト）</div>
-                <div class="component">最新ニュース<br/>（3-5件表示）</div>
-                <div class="component">IR情報ハイライト<br/>（決算・株価等）</div>
-                <div class="component">フッター<br/>（サイトマップ・SNS）</div>
-            </div>
-        </div>
-    </div>
-
-    <div id="realestate" class="tab-content">
-        <h2 style="color: #2c3e50; margin-bottom: 30px;">不動産開発事業サイト構造</h2>
-
-        <div class="mermaid-container">
-            <div class="mermaid">
-            graph TD
-                A[不動産開発トップ] --> B[開発実績]
-                A --> C[進行中プロジェクト]
-                A --> D[投資情報]
-                A --> E[パートナー募集]
-
-                B --> B1[完成物件一覧]
-                B1 --> B11[物件A詳細]
-                B1 --> B12[物件B詳細]
-                B1 --> B13[物件C詳細]
-
-                C --> C1[開発予定地マップ]
-                C --> C2[プロジェクト進捗]
-                C --> C3[完成予想CG]
-
-                D --> D1[投資スキーム]
-                D --> D2[収益シミュレーション]
-                D --> D3[リスク説明]
-
-                E --> E1[パートナー要件]
-                E --> E2[提携事例]
-                E --> E3[お問い合わせフォーム]
-
-                style A fill:#f3e5f5
-                style B11 fill:#fff
-                style B12 fill:#fff
-                style B13 fill:#fff
-            </div>
-        </div>
-
-        <div class="wireframe-section">
-            <h3>🏗️ ページ構成要素</h3>
-            <div class="component-grid">
-                <div class="component">プロジェクト検索<br/>（エリア・規模・時期）</div>
-                <div class="component">開発実績マップ<br/>（地図上に物件表示）</div>
-                <div class="component">プロジェクト詳細<br/>（図面・スペック）</div>
-                <div class="component">投資収益計算機<br/>（シミュレーター）</div>
-                <div class="component">パートナー申込<br/>（資格審査フォーム）</div>
-                <div class="component">開発ブログ<br/>（進捗レポート）</div>
-            </div>
-        </div>
-    </div>
-
-    <div id="hospitality" class="tab-content">
-        <h2 style="color: #2c3e50; margin-bottom: 30px;">民泊・ホテル事業サイト構造</h2>
-
-        <div class="mermaid-container">
-            <div class="mermaid">
-            graph TD
-                A[ホテル事業トップ] --> B[ホテル検索]
-                A --> C[ホテル一覧]
-                A --> D[特別プラン]
-
-                B --> B1[エリア絞り込み]
-                B --> B2[日程・人数設定]
-                B --> B3[価格帯・設備フィルター]
-
-                C --> C1[ホテルA詳細LP]
-                C --> C2[ホテルB詳細LP]
-                C --> C3[ホテルC詳細LP]
-
-                C1 --> C11[客室紹介]
-                C1 --> C12[設備・サービス]
-                C1 --> C13[アクセス情報]
-                C1 --> C14[予約フォーム]
-                C1 --> C15[口コミ・レビュー]
-
-                C14 --> C141[空室確認]
-                C141 --> C142[プラン選択]
-                C142 --> C143[ゲスト情報入力]
-                C143 --> C144[決済処理]
-                C144 --> C145[予約完了]
-
-                style A fill:#e8f5e8
-                style C1 fill:#e3f2fd
-                style C2 fill:#e3f2fd
-                style C3 fill:#e3f2fd
-                style C145 fill:#c8e6c9
-            </div>
-        </div>
-
-        <div class="wireframe-section">
-            <h3>🏨 予約システム機能</h3>
-            <div class="component-grid">
-                <div class="component">リアルタイム空室確認<br/>（在庫管理連携）</div>
-                <div class="component">動的価格表示<br/>（需要予測ベース）</div>
-                <div class="component">多言語対応<br/>（日・英・中・韓）</div>
-                <div class="component">決済ゲートウェイ<br/>（クレカ・QR決済）</div>
-                <div class="component">予約管理ダッシュボード<br/>（ゲスト向け）</div>
-                <div class="component">レビューシステム<br/>（評価・口コミ）</div>
-            </div>
-        </div>
-    </div>
-
-    <div id="restaurant" class="tab-content">
-        <h2 style="color: #2c3e50; margin-bottom: 30px;">飲食店事業サイト構造</h2>
-
-        <div class="mermaid-container">
-            <div class="mermaid">
-            graph TD
-                A[飲食事業トップ] --> B[店舗検索]
-                A --> C[店舗一覧]
-                A --> D[ブランド紹介]
-
-                B --> B1[エリア検索]
-                B --> B2[料理ジャンル]
-                B --> B3[価格帯・営業時間]
-
-                C --> C1[イタリアンA店]
-                C --> C2[和食B店]
-                C --> C3[フレンチC店]
-                C --> C4[カフェD店]
-
-                C1 --> C11[店舗情報・アクセス]
-                C1 --> C12[メニュー・料金]
-                C1 --> C13[コンセプト・こだわり]
-                C1 --> C14[席予約システム]
-                C1 --> C15[イベント・お知らせ]
-
-                C14 --> C141[空席確認]
-                C141 --> C142[日時・人数選択]
-                C142 --> C143[お客様情報]
-                C143 --> C144[予約確定]
-
-                style A fill:#fff3e0
-                style C1 fill:#f3e5f5
-                style C2 fill:#e8f5e8
-                style C3 fill:#f3e5f5
-                style C4 fill:#fff3e0
-            </div>
-        </div>
-
-        <div class="wireframe-section">
-            <h3>🍽️ 店舗管理機能</h3>
-            <div class="component-grid">
-                <div class="component">席予約管理<br/>（リアルタイム更新）</div>
-                <div class="component">メニュー管理<br/>（季節・在庫連動）</div>
-                <div class="component">顧客管理<br/>（来店履歴・嗜好）</div>
-                <div class="component">売上分析<br/>（店舗別・時間別）</div>
-                <div class="component">スタッフ管理<br/>（シフト・売上）</div>
-                <div class="component">配信連携<br/>（UberEats等）</div>
-            </div>
-        </div>
-    </div>
-
-    <div id="hire" class="tab-content">
-        <h2 style="color: #2c3e50; margin-bottom: 30px;">ハイヤー事業サイト構造</h2>
-
-        <div class="mermaid-container">
-            <div class="mermaid">
-            graph TD
-                A[ハイヤー事業トップ] --> B[サービス紹介]
-                A --> C[予約システム]
-                A --> D[料金体系]
-                A --> E[法人契約]
-
-                B --> B1[空港送迎]
-                B --> B2[観光ツアー]
-                B --> B3[ビジネス利用]
-                B --> B4[特別な日]
-
-                C --> C1[日時選択]
-                C1 --> C2[乗車・降車地設定]
-                C2 --> C3[車種・オプション]
-                C3 --> C4[料金確認]
-                C4 --> C5[お客様情報]
-                C5 --> C6[決済・予約確定]
-
-                D --> D1[基本料金表]
-                D --> D2[距離・時間料金]
-                D --> D3[オプション料金]
-
-                E --> E1[法人プラン]
-                E --> E2[契約手続き]
-                E --> E3[請求・管理]
-
-                style A fill:#fce4ec
-                style C6 fill:#c8e6c9
-            </div>
-        </div>
-
-        <div class="wireframe-section">
-            <h3>🚗 配車システム機能</h3>
-            <div class="component-grid">
-                <div class="component">リアルタイム配車<br/>（GPS追跡）</div>
-                <div class="component">自動料金計算<br/>（距離・時間・割増）</div>
-                <div class="component">ドライバー管理<br/>（スケジュール・評価）</div>
-                <div class="component">ルート最適化<br/>（交通状況考慮）</div>
-                <div class="component">多言語対応<br/>（外国人観光客）</div>
-                <div class="component">法人請求システム<br/>（月次・部署別）</div>
-            </div>
-        </div>
-    </div>
-
-    <div id="branding" class="tab-content">
-        <h2 style="color: #2c3e50; margin-bottom: 30px;">ブランディングサイト構造</h2>
-
-        <div class="mermaid-container">
-            <div class="mermaid">
-            graph TD
-                A[ブランディングトップ] --> B[ブランドストーリー]
-                A --> C[企業価値・理念]
-                A --> D[社会貢献活動]
-                A --> E[メディア・広報]
-
-                B --> B1[創業ストーリー]
-                B --> B2[ビジョン・ミッション]
-                B --> B3[価値観・企業文化]
-
-                C --> C1[持続可能性への取組み]
-                C --> C2[地域貢献活動]
-                C --> C3[イノベーション事例]
-
-                D --> D1[環境保護活動]
-                D --> D2[教育支援]
-                D --> D3[地域振興]
-
-                E --> E1[プレス・メディアキット]
-                E --> E2[取材・インタビュー]
-                E --> E3[受賞歴・認定]
-
-                style A fill:#f1f8e9
-                style B1 fill:#e8f5e8
-                style C1 fill:#e3f2fd
-                style D1 fill:#fff3e0
-            </div>
-        </div>
-
-        <div class="wireframe-section">
-            <h3>✨ ブランディング要素</h3>
-            <div class="component-grid">
-                <div class="component">インタラクティブ年表<br/>（企業沿革）</div>
-                <div class="component">価値観診断<br/>（訪問者との親和性）</div>
-                <div class="component">CSR活動紹介<br/>（動画・事例）</div>
-                <div class="component">社員インタビュー<br/>（働き方・やりがい）</div>
-                <div class="component">メディア掲載一覧<br/>（信頼性向上）</div>
-                <div class="component">ステークホルダー向け<br/>（専用コンテンツ）</div>
-            </div>
-        </div>
-    </div>
-
-    <div id="integration" class="tab-content">
-        <h2 style="color: #2c3e50; margin-bottom: 30px;">システム統合・技術構成図</h2>
-
-        <div class="mermaid-container">
-            <div class="mermaid">
-            graph TD
-                A[共通基盤システム] --> B[顧客管理CRM]
-                A --> C[決済ゲートウェイ]
-                A --> D[予約管理システム]
-                A --> E[コンテンツ管理CMS]
-
-                B --> B1[統合顧客DB]
-                B --> B2[行動履歴分析]
-                B --> B3[マーケティング自動化]
-
-                C --> C1[クレジットカード決済]
-                C --> C2[QR決済]
-                C --> C3[法人請求]
-
-                D --> D1[ホテル予約]
-                D --> D2[レストラン予約]
-                D --> D3[ハイヤー予約]
-
-                E --> E1[各サイトコンテンツ]
-                E --> E2[多言語管理]
-                E --> E3[SEO最適化]
-
-                F[外部連携] --> F1[宿泊予約サイト連携]
-                F --> F2[グルメサイト連携]
-                F --> F3[配車アプリ連携]
-                F --> F4[会計システム連携]
-
-                style A fill:#e1f5fe
-                style F fill:#fff3e0
-            </div>
-        </div>
-
-        <div class="integration-box">
-            <h4>🔧 推奨技術スタック</h4>
-            <div class="tech-stack">
-                <div class="tech-item">フロントエンド: React/Next.js</div>
-                <div class="tech-item">バックエンド: Node.js/Express</div>
-                <div class="tech-item">データベース: PostgreSQL</div>
-                <div class="tech-item">CMS: Strapi/Contentful</div>
-                <div class="tech-item">決済: Stripe/PayPal</div>
-                <div class="tech-item">認証: Auth0/Firebase</div>
-                <div class="tech-item">ホスティング: AWS/Vercel</div>
-                <div class="tech-item">CDN: CloudFlare</div>
-            </div>
-        </div>
-
-        <div class="wireframe-section">
-            <h3>🔄 システム間連携</h3>
-            <div class="component-grid">
-                <div class="component">SSO（シングルサインオン）<br/>各サイト間の認証統合</div>
-                <div class="component">統合ダッシュボード<br/>全事業の管理画面</div>
-                <div class="component">データ分析基盤<br/>行動分析・売上分析</div>
-                <div class="component">マーケティング自動化<br/>メール・プッシュ通知</div>
-                <div class="component">API Gateway<br/>外部サービス連携</div>
-                <div class="component">セキュリティ監視<br/>不正アクセス対策</div>
-            </div>
-        </div>
-    </div>
+    <footer style="background: #2c3e50; color: white; padding: 30px; text-align: center; margin-top: 50px;">
+        <p><strong>企業ウェブサイト構造図・ワイヤーフレーム設計ドキュメント</strong></p>
+        <p>多事業展開企業のための統合ウェブプラットフォーム設計案</p>
+        <p style="margin-top: 15px; opacity: 0.8;">
+            このドキュメントは、企業の多事業展開に対応した包括的なウェブプラットフォーム設計案です。<br>
+            各事業の特性を活かしつつ、シナジー効果を最大化する統合型アプローチを提案しています。
+        </p>
+    </footer>
 </div>
 
 <script>
+    // Mermaid初期化
     mermaid.initialize({
         startOnLoad: true,
         theme: 'default',
@@ -871,24 +1359,29 @@ box-sizing: border-box;
         }
     });
 
-    function showTab(tabName) {
-        // すべてのタブコンテンツを非表示
-        const contents = document.querySelectorAll('.tab-content');
-        contents.forEach(content => content.classList.remove('active'));
+    // スムーズスクロール
+    document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+        anchor.addEventListener('click', function (e) {
+            e.preventDefault();
+            const target = document.querySelector(this.getAttribute('href'));
+            if (target) {
+                target.scrollIntoView({
+                    behavior: 'smooth',
+                    block: 'start'
+                });
+            }
+        });
+    });
 
-        // すべてのタブボタンを非アクティブ
-        const tabs = document.querySelectorAll('.nav-tab');
-        tabs.forEach(tab => tab.classList.remove('active'));
+    // プリント用CSS適用
+    window.addEventListener('beforeprint', () => {
+        document.body.style.background = 'white';
+    });
 
-        // 選択されたタブを表示
-        document.getElementById(tabName).classList.add('active');
-
-        // 選択されたタブボタンをアクティブ
-        event.target.classList.add('active');
-
-        // マーメイド図を再描画
-        mermaid.init();
-    }
+    // 印刷後元に戻す
+    window.addEventListener('afterprint', () => {
+        document.body.style.background = '#f8f9fa';
+    });
 </script>
 
 ```
