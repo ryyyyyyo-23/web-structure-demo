@@ -1,0 +1,897 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>企業ウェブサイト構造図・ワイヤーフレーム</title>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/mermaid/10.6.1/mermaid.min.js"></script>
+<style>
+* {
+margin: 0;
+padding: 0;
+box-sizing: border-box;
+}
+
+```
+    body {
+        font-family: 'Arial', sans-serif;
+        background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+        min-height: 100vh;
+        padding: 20px;
+    }
+
+    .container {
+        max-width: 1600px;
+        margin: 0 auto;
+        background: white;
+        border-radius: 15px;
+        box-shadow: 0 20px 40px rgba(0,0,0,0.1);
+        overflow: hidden;
+    }
+
+    .header {
+        background: linear-gradient(135deg, #2c3e50 0%, #34495e 100%);
+        color: white;
+        padding: 30px;
+        text-align: center;
+    }
+
+    .header h1 {
+        font-size: 2.5em;
+        margin-bottom: 10px;
+        text-shadow: 2px 2px 4px rgba(0,0,0,0.3);
+    }
+
+    .header p {
+        font-size: 1.2em;
+        opacity: 0.9;
+    }
+
+    .nav-tabs {
+        display: flex;
+        background: #ecf0f1;
+        overflow-x: auto;
+        flex-wrap: wrap;
+    }
+
+    .nav-tab {
+        padding: 15px 20px;
+        background: none;
+        border: none;
+        cursor: pointer;
+        font-size: 0.9em;
+        font-weight: bold;
+        color: #34495e;
+        transition: all 0.3s ease;
+        white-space: nowrap;
+        position: relative;
+        flex: 1;
+        min-width: 120px;
+    }
+
+    .nav-tab:hover {
+        background: #d5dbdb;
+        transform: translateY(-2px);
+    }
+
+    .nav-tab.active {
+        background: #3498db;
+        color: white;
+        box-shadow: 0 4px 8px rgba(52, 152, 219, 0.3);
+    }
+
+    .tab-content {
+        display: none;
+        padding: 30px;
+        min-height: 600px;
+    }
+
+    .tab-content.active {
+        display: block;
+    }
+
+    .mermaid-container {
+        background: #f8f9fa;
+        border-radius: 10px;
+        padding: 20px;
+        margin: 20px 0;
+        overflow-x: auto;
+        border: 2px solid #e9ecef;
+    }
+
+    .mermaid {
+        text-align: center;
+    }
+
+    .structure-grid {
+        display: grid;
+        grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
+        gap: 25px;
+        margin: 30px 0;
+    }
+
+    .structure-card {
+        background: linear-gradient(135deg, #f8f9fa 0%, #e9ecef 100%);
+        border-radius: 12px;
+        padding: 25px;
+        box-shadow: 0 8px 16px rgba(0,0,0,0.1);
+        transition: all 0.3s ease;
+        border: 2px solid transparent;
+    }
+
+    .structure-card:hover {
+        transform: translateY(-5px);
+        box-shadow: 0 15px 30px rgba(0,0,0,0.15);
+        border-color: #3498db;
+    }
+
+    .structure-card h3 {
+        color: #2c3e50;
+        margin-bottom: 15px;
+        font-size: 1.3em;
+        border-bottom: 3px solid #3498db;
+        padding-bottom: 10px;
+    }
+
+    .page-hierarchy {
+        list-style: none;
+        margin-left: 0;
+    }
+
+    .page-hierarchy li {
+        padding: 5px 0;
+        color: #555;
+        position: relative;
+        padding-left: 20px;
+    }
+
+    .page-hierarchy > li {
+        font-weight: bold;
+        color: #2c3e50;
+        margin-bottom: 10px;
+    }
+
+    .page-hierarchy > li > ul {
+        list-style: none;
+        margin-top: 5px;
+    }
+
+    .page-hierarchy > li > ul > li {
+        font-weight: normal;
+        color: #666;
+        padding-left: 20px;
+        border-left: 2px solid #ddd;
+        margin-left: 10px;
+    }
+
+    .page-hierarchy > li > ul > li:before {
+        content: "└";
+        color: #3498db;
+        position: absolute;
+        left: 0;
+    }
+
+    .wireframe-section {
+        background: white;
+        border: 2px solid #e9ecef;
+        border-radius: 10px;
+        padding: 20px;
+        margin: 20px 0;
+    }
+
+    .wireframe-section h3 {
+        color: #2c3e50;
+        margin-bottom: 15px;
+        padding-bottom: 10px;
+        border-bottom: 2px solid #3498db;
+    }
+
+    .component-grid {
+        display: grid;
+        grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+        gap: 15px;
+        margin-top: 15px;
+    }
+
+    .component {
+        background: #f8f9fa;
+        border: 1px solid #dee2e6;
+        border-radius: 8px;
+        padding: 15px;
+        text-align: center;
+        font-size: 0.9em;
+        color: #495057;
+        transition: all 0.3s ease;
+    }
+
+    .component:hover {
+        background: #e9ecef;
+        transform: translateY(-2px);
+    }
+
+    .flow-step {
+        background: #3498db;
+        color: white;
+        padding: 10px 20px;
+        border-radius: 25px;
+        display: inline-block;
+        margin: 5px;
+        font-weight: bold;
+        font-size: 0.9em;
+    }
+
+    .integration-box {
+        background: #fff3cd;
+        border: 2px solid #ffeaa7;
+        border-radius: 10px;
+        padding: 20px;
+        margin: 20px 0;
+    }
+
+    .integration-box h4 {
+        color: #856404;
+        margin-bottom: 10px;
+    }
+
+    .tech-stack {
+        display: flex;
+        flex-wrap: wrap;
+        gap: 10px;
+        margin-top: 15px;
+    }
+
+    .tech-item {
+        background: #17a2b8;
+        color: white;
+        padding: 8px 15px;
+        border-radius: 20px;
+        font-size: 0.85em;
+        font-weight: bold;
+    }
+
+    @media (max-width: 768px) {
+        .nav-tabs {
+            flex-direction: column;
+        }
+
+        .tab-content {
+            padding: 15px;
+        }
+
+        .structure-grid {
+            grid-template-columns: 1fr;
+        }
+
+        .mermaid-container {
+            padding: 10px;
+        }
+    }
+</style>
+
+```
+
+</head>
+<body>
+<div class="container">
+<div class="header">
+<h1>企業ウェブサイト構造図</h1>
+<p>多事業展開企業のための統合ウェブプラットフォーム設計案</p>
+</div>
+
+```
+    <div class="nav-tabs">
+        <button class="nav-tab active" onclick="showTab('architecture')">サイト構造図</button>
+        <button class="nav-tab" onclick="showTab('userflow')">ユーザーフロー</button>
+        <button class="nav-tab" onclick="showTab('corporate')">コーポレート</button>
+        <button class="nav-tab" onclick="showTab('realestate')">不動産開発</button>
+        <button class="nav-tab" onclick="showTab('hospitality')">民泊・ホテル</button>
+        <button class="nav-tab" onclick="showTab('restaurant')">飲食店</button>
+        <button class="nav-tab" onclick="showTab('hire')">ハイヤー</button>
+        <button class="nav-tab" onclick="showTab('branding')">ブランディング</button>
+        <button class="nav-tab" onclick="showTab('integration')">システム統合</button>
+    </div>
+
+    <div id="architecture" class="tab-content active">
+        <h2 style="color: #2c3e50; margin-bottom: 30px; text-align: center;">全体サイト構造図</h2>
+
+        <div class="mermaid-container">
+            <div class="mermaid">
+            graph TD
+                A[メインコーポレートサイト<br/>corporate.company.com] --> B[不動産開発事業<br/>realestate.company.com]
+                A --> C[民泊・ホテル事業<br/>hotels.company.com]
+                A --> D[飲食店事業<br/>restaurants.company.com]
+                A --> E[ハイヤー事業<br/>hire.company.com]
+                A --> F[ブランディングサイト<br/>brand.company.com]
+
+                B --> B1[開発実績]
+                B --> B2[進行中プロジェクト]
+                B --> B3[投資家情報]
+
+                C --> C1[ホテル一覧]
+                C --> C2[個別ホテルLP]
+                C --> C3[予約システム]
+                C2 --> C21[ホテルA詳細]
+                C2 --> C22[ホテルB詳細]
+                C2 --> C23[ホテルC詳細]
+
+                D --> D1[店舗一覧]
+                D --> D2[メニュー・予約]
+                D --> D3[イベント情報]
+
+                E --> E1[サービス紹介]
+                E --> E2[リアルタイム予約]
+                E --> E3[法人契約]
+
+                F --> F1[ブランドストーリー]
+                F --> F2[社会貢献]
+                F --> F3[企業価値]
+
+                style A fill:#e1f5fe
+                style B fill:#f3e5f5
+                style C fill:#e8f5e8
+                style D fill:#fff3e0
+                style E fill:#fce4ec
+                style F fill:#f1f8e9
+            </div>
+        </div>
+
+        <div class="structure-grid">
+            <div class="structure-card">
+                <h3>🏢 メインコーポレートサイト</h3>
+                <ul class="page-hierarchy">
+                    <li>トップページ
+                        <ul>
+                            <li>企業概要</li>
+                            <li>代表メッセージ</li>
+                            <li>事業紹介（各事業へのゲートウェイ）</li>
+                        </ul>
+                    </li>
+                    <li>IR情報
+                        <ul>
+                            <li>決算情報</li>
+                            <li>株主総会</li>
+                            <li>IR資料</li>
+                        </ul>
+                    </li>
+                    <li>ニュース・プレス
+                        <ul>
+                            <li>最新ニュース</li>
+                            <li>プレスリリース</li>
+                            <li>メディア掲載</li>
+                        </ul>
+                    </li>
+                    <li>採用情報
+                        <ul>
+                            <li>新卒採用</li>
+                            <li>中途採用</li>
+                            <li>企業文化</li>
+                        </ul>
+                    </li>
+                </ul>
+            </div>
+
+            <div class="structure-card">
+                <h3>🏗️ 不動産開発事業</h3>
+                <ul class="page-hierarchy">
+                    <li>開発実績
+                        <ul>
+                            <li>完成物件一覧</li>
+                            <li>物件詳細ページ</li>
+                            <li>施工事例</li>
+                        </ul>
+                    </li>
+                    <li>進行中プロジェクト
+                        <ul>
+                            <li>開発予定地</li>
+                            <li>進捗状況</li>
+                            <li>完成予想図</li>
+                        </ul>
+                    </li>
+                    <li>投資・パートナー
+                        <ul>
+                            <li>投資機会</li>
+                            <li>パートナー募集</li>
+                            <li>事業提携</li>
+                        </ul>
+                    </li>
+                </ul>
+            </div>
+
+            <div class="structure-card">
+                <h3>🏨 民泊・ホテル事業</h3>
+                <ul class="page-hierarchy">
+                    <li>ホテル検索・一覧
+                        <ul>
+                            <li>エリア別検索</li>
+                            <li>価格帯フィルター</li>
+                            <li>設備・サービス絞り込み</li>
+                        </ul>
+                    </li>
+                    <li>個別ホテルLP
+                        <ul>
+                            <li>ホテル詳細情報</li>
+                            <li>客室紹介</li>
+                            <li>予約・空室確認</li>
+                        </ul>
+                    </li>
+                    <li>予約管理
+                        <ul>
+                            <li>予約フォーム</li>
+                            <li>決済システム</li>
+                            <li>予約確認・変更</li>
+                        </ul>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </div>
+
+    <div id="userflow" class="tab-content">
+        <h2 style="color: #2c3e50; margin-bottom: 30px; text-align: center;">ユーザーフロー図</h2>
+
+        <div class="mermaid-container">
+            <div class="mermaid">
+            flowchart TD
+                Start([ユーザー訪問]) --> MainSite{メインサイト}
+
+                MainSite --> Corp[企業情報閲覧]
+                MainSite --> Business[事業紹介から各サイトへ]
+
+                Business --> Hotel[ホテル事業サイト]
+                Business --> Rest[飲食店事業サイト]
+                Business --> Hire[ハイヤー事業サイト]
+                Business --> RealEstate[不動産開発サイト]
+
+                Hotel --> Search1[宿泊先検索]
+                Search1 --> Detail1[ホテル詳細]
+                Detail1 --> Book1[予約・決済]
+
+                Rest --> Search2[店舗検索]
+                Search2 --> Detail2[店舗詳細]
+                Detail2 --> Book2[席予約]
+
+                Hire --> Search3[サービス選択]
+                Search3 --> Detail3[料金確認]
+                Detail3 --> Book3[配車予約]
+
+                RealEstate --> Portfolio[実績閲覧]
+                RealEstate --> Project[プロジェクト情報]
+                RealEstate --> Contact[お問い合わせ]
+
+                Book1 --> Complete([予約完了])
+                Book2 --> Complete
+                Book3 --> Complete
+                Contact --> Complete
+
+                style Start fill:#e8f5e8
+                style Complete fill:#ffeb3b
+                style MainSite fill:#e1f5fe
+            </div>
+        </div>
+
+        <div class="wireframe-section">
+            <h3>🎯 主要ユーザージャーニー</h3>
+            <div style="margin: 20px 0;">
+                <h4 style="color: #2c3e50; margin-bottom: 15px;">宿泊予約フロー</h4>
+                <div class="flow-step">コーポレートサイト訪問</div>
+                <div class="flow-step">→ ホテル事業紹介</div>
+                <div class="flow-step">→ ホテルサイト</div>
+                <div class="flow-step">→ 検索・絞り込み</div>
+                <div class="flow-step">→ ホテル詳細</div>
+                <div class="flow-step">→ 予約・決済</div>
+                <div class="flow-step">→ 完了</div>
+            </div>
+
+            <div style="margin: 20px 0;">
+                <h4 style="color: #2c3e50; margin-bottom: 15px;">投資家・パートナー獲得フロー</h4>
+                <div class="flow-step">コーポレートサイト</div>
+                <div class="flow-step">→ IR情報</div>
+                <div class="flow-step">→ 事業実績</div>
+                <div class="flow-step">→ 不動産開発サイト</div>
+                <div class="flow-step">→ プロジェクト詳細</div>
+                <div class="flow-step">→ お問い合わせ</div>
+            </div>
+        </div>
+    </div>
+
+    <div id="corporate" class="tab-content">
+        <h2 style="color: #2c3e50; margin-bottom: 30px;">コーポレートサイト構造</h2>
+
+        <div class="mermaid-container">
+            <div class="mermaid">
+            graph TD
+                A[トップページ] --> B[企業情報]
+                A --> C[事業紹介]
+                A --> D[IR情報]
+                A --> E[ニュース]
+                A --> F[採用情報]
+                A --> G[お問い合わせ]
+
+                B --> B1[会社概要]
+                B --> B2[代表メッセージ]
+                B --> B3[沿革]
+                B --> B4[組織図]
+
+                C --> C1[不動産開発事業へ]
+                C --> C2[民泊・ホテル事業へ]
+                C --> C3[飲食店事業へ]
+                C --> C4[ハイヤー事業へ]
+
+                D --> D1[決算情報]
+                D --> D2[株主総会]
+                D --> D3[IR資料ダウンロード]
+
+                E --> E1[プレスリリース]
+                E --> E2[メディア掲載]
+                E --> E3[お知らせ]
+
+                F --> F1[新卒採用]
+                F --> F2[中途採用]
+                F --> F3[福利厚生]
+
+                style A fill:#e1f5fe
+                style C1 fill:#f3e5f5
+                style C2 fill:#e8f5e8
+                style C3 fill:#fff3e0
+                style C4 fill:#fce4ec
+            </div>
+        </div>
+
+        <div class="wireframe-section">
+            <h3>🏢 メインページ構成要素</h3>
+            <div class="component-grid">
+                <div class="component">ヘッダーナビゲーション<br/>（全事業へのリンク）</div>
+                <div class="component">メインビジュアル<br/>（企業メッセージ動画）</div>
+                <div class="component">事業紹介セクション<br/>（4事業のハイライト）</div>
+                <div class="component">最新ニュース<br/>（3-5件表示）</div>
+                <div class="component">IR情報ハイライト<br/>（決算・株価等）</div>
+                <div class="component">フッター<br/>（サイトマップ・SNS）</div>
+            </div>
+        </div>
+    </div>
+
+    <div id="realestate" class="tab-content">
+        <h2 style="color: #2c3e50; margin-bottom: 30px;">不動産開発事業サイト構造</h2>
+
+        <div class="mermaid-container">
+            <div class="mermaid">
+            graph TD
+                A[不動産開発トップ] --> B[開発実績]
+                A --> C[進行中プロジェクト]
+                A --> D[投資情報]
+                A --> E[パートナー募集]
+
+                B --> B1[完成物件一覧]
+                B1 --> B11[物件A詳細]
+                B1 --> B12[物件B詳細]
+                B1 --> B13[物件C詳細]
+
+                C --> C1[開発予定地マップ]
+                C --> C2[プロジェクト進捗]
+                C --> C3[完成予想CG]
+
+                D --> D1[投資スキーム]
+                D --> D2[収益シミュレーション]
+                D --> D3[リスク説明]
+
+                E --> E1[パートナー要件]
+                E --> E2[提携事例]
+                E --> E3[お問い合わせフォーム]
+
+                style A fill:#f3e5f5
+                style B11 fill:#fff
+                style B12 fill:#fff
+                style B13 fill:#fff
+            </div>
+        </div>
+
+        <div class="wireframe-section">
+            <h3>🏗️ ページ構成要素</h3>
+            <div class="component-grid">
+                <div class="component">プロジェクト検索<br/>（エリア・規模・時期）</div>
+                <div class="component">開発実績マップ<br/>（地図上に物件表示）</div>
+                <div class="component">プロジェクト詳細<br/>（図面・スペック）</div>
+                <div class="component">投資収益計算機<br/>（シミュレーター）</div>
+                <div class="component">パートナー申込<br/>（資格審査フォーム）</div>
+                <div class="component">開発ブログ<br/>（進捗レポート）</div>
+            </div>
+        </div>
+    </div>
+
+    <div id="hospitality" class="tab-content">
+        <h2 style="color: #2c3e50; margin-bottom: 30px;">民泊・ホテル事業サイト構造</h2>
+
+        <div class="mermaid-container">
+            <div class="mermaid">
+            graph TD
+                A[ホテル事業トップ] --> B[ホテル検索]
+                A --> C[ホテル一覧]
+                A --> D[特別プラン]
+
+                B --> B1[エリア絞り込み]
+                B --> B2[日程・人数設定]
+                B --> B3[価格帯・設備フィルター]
+
+                C --> C1[ホテルA詳細LP]
+                C --> C2[ホテルB詳細LP]
+                C --> C3[ホテルC詳細LP]
+
+                C1 --> C11[客室紹介]
+                C1 --> C12[設備・サービス]
+                C1 --> C13[アクセス情報]
+                C1 --> C14[予約フォーム]
+                C1 --> C15[口コミ・レビュー]
+
+                C14 --> C141[空室確認]
+                C141 --> C142[プラン選択]
+                C142 --> C143[ゲスト情報入力]
+                C143 --> C144[決済処理]
+                C144 --> C145[予約完了]
+
+                style A fill:#e8f5e8
+                style C1 fill:#e3f2fd
+                style C2 fill:#e3f2fd
+                style C3 fill:#e3f2fd
+                style C145 fill:#c8e6c9
+            </div>
+        </div>
+
+        <div class="wireframe-section">
+            <h3>🏨 予約システム機能</h3>
+            <div class="component-grid">
+                <div class="component">リアルタイム空室確認<br/>（在庫管理連携）</div>
+                <div class="component">動的価格表示<br/>（需要予測ベース）</div>
+                <div class="component">多言語対応<br/>（日・英・中・韓）</div>
+                <div class="component">決済ゲートウェイ<br/>（クレカ・QR決済）</div>
+                <div class="component">予約管理ダッシュボード<br/>（ゲスト向け）</div>
+                <div class="component">レビューシステム<br/>（評価・口コミ）</div>
+            </div>
+        </div>
+    </div>
+
+    <div id="restaurant" class="tab-content">
+        <h2 style="color: #2c3e50; margin-bottom: 30px;">飲食店事業サイト構造</h2>
+
+        <div class="mermaid-container">
+            <div class="mermaid">
+            graph TD
+                A[飲食事業トップ] --> B[店舗検索]
+                A --> C[店舗一覧]
+                A --> D[ブランド紹介]
+
+                B --> B1[エリア検索]
+                B --> B2[料理ジャンル]
+                B --> B3[価格帯・営業時間]
+
+                C --> C1[イタリアンA店]
+                C --> C2[和食B店]
+                C --> C3[フレンチC店]
+                C --> C4[カフェD店]
+
+                C1 --> C11[店舗情報・アクセス]
+                C1 --> C12[メニュー・料金]
+                C1 --> C13[コンセプト・こだわり]
+                C1 --> C14[席予約システム]
+                C1 --> C15[イベント・お知らせ]
+
+                C14 --> C141[空席確認]
+                C141 --> C142[日時・人数選択]
+                C142 --> C143[お客様情報]
+                C143 --> C144[予約確定]
+
+                style A fill:#fff3e0
+                style C1 fill:#f3e5f5
+                style C2 fill:#e8f5e8
+                style C3 fill:#f3e5f5
+                style C4 fill:#fff3e0
+            </div>
+        </div>
+
+        <div class="wireframe-section">
+            <h3>🍽️ 店舗管理機能</h3>
+            <div class="component-grid">
+                <div class="component">席予約管理<br/>（リアルタイム更新）</div>
+                <div class="component">メニュー管理<br/>（季節・在庫連動）</div>
+                <div class="component">顧客管理<br/>（来店履歴・嗜好）</div>
+                <div class="component">売上分析<br/>（店舗別・時間別）</div>
+                <div class="component">スタッフ管理<br/>（シフト・売上）</div>
+                <div class="component">配信連携<br/>（UberEats等）</div>
+            </div>
+        </div>
+    </div>
+
+    <div id="hire" class="tab-content">
+        <h2 style="color: #2c3e50; margin-bottom: 30px;">ハイヤー事業サイト構造</h2>
+
+        <div class="mermaid-container">
+            <div class="mermaid">
+            graph TD
+                A[ハイヤー事業トップ] --> B[サービス紹介]
+                A --> C[予約システム]
+                A --> D[料金体系]
+                A --> E[法人契約]
+
+                B --> B1[空港送迎]
+                B --> B2[観光ツアー]
+                B --> B3[ビジネス利用]
+                B --> B4[特別な日]
+
+                C --> C1[日時選択]
+                C1 --> C2[乗車・降車地設定]
+                C2 --> C3[車種・オプション]
+                C3 --> C4[料金確認]
+                C4 --> C5[お客様情報]
+                C5 --> C6[決済・予約確定]
+
+                D --> D1[基本料金表]
+                D --> D2[距離・時間料金]
+                D --> D3[オプション料金]
+
+                E --> E1[法人プラン]
+                E --> E2[契約手続き]
+                E --> E3[請求・管理]
+
+                style A fill:#fce4ec
+                style C6 fill:#c8e6c9
+            </div>
+        </div>
+
+        <div class="wireframe-section">
+            <h3>🚗 配車システム機能</h3>
+            <div class="component-grid">
+                <div class="component">リアルタイム配車<br/>（GPS追跡）</div>
+                <div class="component">自動料金計算<br/>（距離・時間・割増）</div>
+                <div class="component">ドライバー管理<br/>（スケジュール・評価）</div>
+                <div class="component">ルート最適化<br/>（交通状況考慮）</div>
+                <div class="component">多言語対応<br/>（外国人観光客）</div>
+                <div class="component">法人請求システム<br/>（月次・部署別）</div>
+            </div>
+        </div>
+    </div>
+
+    <div id="branding" class="tab-content">
+        <h2 style="color: #2c3e50; margin-bottom: 30px;">ブランディングサイト構造</h2>
+
+        <div class="mermaid-container">
+            <div class="mermaid">
+            graph TD
+                A[ブランディングトップ] --> B[ブランドストーリー]
+                A --> C[企業価値・理念]
+                A --> D[社会貢献活動]
+                A --> E[メディア・広報]
+
+                B --> B1[創業ストーリー]
+                B --> B2[ビジョン・ミッション]
+                B --> B3[価値観・企業文化]
+
+                C --> C1[持続可能性への取組み]
+                C --> C2[地域貢献活動]
+                C --> C3[イノベーション事例]
+
+                D --> D1[環境保護活動]
+                D --> D2[教育支援]
+                D --> D3[地域振興]
+
+                E --> E1[プレス・メディアキット]
+                E --> E2[取材・インタビュー]
+                E --> E3[受賞歴・認定]
+
+                style A fill:#f1f8e9
+                style B1 fill:#e8f5e8
+                style C1 fill:#e3f2fd
+                style D1 fill:#fff3e0
+            </div>
+        </div>
+
+        <div class="wireframe-section">
+            <h3>✨ ブランディング要素</h3>
+            <div class="component-grid">
+                <div class="component">インタラクティブ年表<br/>（企業沿革）</div>
+                <div class="component">価値観診断<br/>（訪問者との親和性）</div>
+                <div class="component">CSR活動紹介<br/>（動画・事例）</div>
+                <div class="component">社員インタビュー<br/>（働き方・やりがい）</div>
+                <div class="component">メディア掲載一覧<br/>（信頼性向上）</div>
+                <div class="component">ステークホルダー向け<br/>（専用コンテンツ）</div>
+            </div>
+        </div>
+    </div>
+
+    <div id="integration" class="tab-content">
+        <h2 style="color: #2c3e50; margin-bottom: 30px;">システム統合・技術構成図</h2>
+
+        <div class="mermaid-container">
+            <div class="mermaid">
+            graph TD
+                A[共通基盤システム] --> B[顧客管理CRM]
+                A --> C[決済ゲートウェイ]
+                A --> D[予約管理システム]
+                A --> E[コンテンツ管理CMS]
+
+                B --> B1[統合顧客DB]
+                B --> B2[行動履歴分析]
+                B --> B3[マーケティング自動化]
+
+                C --> C1[クレジットカード決済]
+                C --> C2[QR決済]
+                C --> C3[法人請求]
+
+                D --> D1[ホテル予約]
+                D --> D2[レストラン予約]
+                D --> D3[ハイヤー予約]
+
+                E --> E1[各サイトコンテンツ]
+                E --> E2[多言語管理]
+                E --> E3[SEO最適化]
+
+                F[外部連携] --> F1[宿泊予約サイト連携]
+                F --> F2[グルメサイト連携]
+                F --> F3[配車アプリ連携]
+                F --> F4[会計システム連携]
+
+                style A fill:#e1f5fe
+                style F fill:#fff3e0
+            </div>
+        </div>
+
+        <div class="integration-box">
+            <h4>🔧 推奨技術スタック</h4>
+            <div class="tech-stack">
+                <div class="tech-item">フロントエンド: React/Next.js</div>
+                <div class="tech-item">バックエンド: Node.js/Express</div>
+                <div class="tech-item">データベース: PostgreSQL</div>
+                <div class="tech-item">CMS: Strapi/Contentful</div>
+                <div class="tech-item">決済: Stripe/PayPal</div>
+                <div class="tech-item">認証: Auth0/Firebase</div>
+                <div class="tech-item">ホスティング: AWS/Vercel</div>
+                <div class="tech-item">CDN: CloudFlare</div>
+            </div>
+        </div>
+
+        <div class="wireframe-section">
+            <h3>🔄 システム間連携</h3>
+            <div class="component-grid">
+                <div class="component">SSO（シングルサインオン）<br/>各サイト間の認証統合</div>
+                <div class="component">統合ダッシュボード<br/>全事業の管理画面</div>
+                <div class="component">データ分析基盤<br/>行動分析・売上分析</div>
+                <div class="component">マーケティング自動化<br/>メール・プッシュ通知</div>
+                <div class="component">API Gateway<br/>外部サービス連携</div>
+                <div class="component">セキュリティ監視<br/>不正アクセス対策</div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<script>
+    mermaid.initialize({
+        startOnLoad: true,
+        theme: 'default',
+        flowchart: {
+            useMaxWidth: true,
+            htmlLabels: true
+        }
+    });
+
+    function showTab(tabName) {
+        // すべてのタブコンテンツを非表示
+        const contents = document.querySelectorAll('.tab-content');
+        contents.forEach(content => content.classList.remove('active'));
+
+        // すべてのタブボタンを非アクティブ
+        const tabs = document.querySelectorAll('.nav-tab');
+        tabs.forEach(tab => tab.classList.remove('active'));
+
+        // 選択されたタブを表示
+        document.getElementById(tabName).classList.add('active');
+
+        // 選択されたタブボタンをアクティブ
+        event.target.classList.add('active');
+
+        // マーメイド図を再描画
+        mermaid.init();
+    }
+</script>
+
+```
+
+</body>
+</html>
